@@ -171,6 +171,35 @@ const useCodeBuddyApi = () => {
     }
   };
 
+  // User registration - Adding this missing function
+  const register = async (username, password) => {
+    setIsLoading(true);
+    setError(null);
+    
+    try {
+      const response = await fetch(`${API_URL}/user/register`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ username, password }),
+      });
+      
+      if (!response.ok) {
+        const errorData = await response.json();
+        throw new Error(errorData.error || 'Registration failed');
+      }
+      
+      const userData = await response.json();
+      return userData;
+    } catch (err) {
+      setError(err.message);
+      throw err;
+    } finally {
+      setIsLoading(false);
+    }
+  };
+
   // Save program to the server
   const saveProgram = async (username, name, code, language) => {
     setIsLoading(true);
@@ -236,6 +265,7 @@ const useCodeBuddyApi = () => {
     executeCode,
     provideInput,
     login,
+    register,  // Added register function export
     saveProgram,
     completeChallenge,
     isLoading,

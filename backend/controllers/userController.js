@@ -1,5 +1,6 @@
 const User = require('../models/user');
 const generateToken = require('../utils/generateToken');
+const Program = require('../models/program');
 
 // Register a new user
 const registerUser = async (req, res) => {
@@ -29,6 +30,7 @@ const registerUser = async (req, res) => {
       res.status(400).json({ error: 'Invalid user data' });
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };
@@ -69,6 +71,7 @@ const loginUser = async (req, res) => {
       res.status(401).json({ error: 'Invalid credentials' });
     }
   } catch (error) {
+    console.error(error);
     res.status(500).json({ error: error.message });
   }
 };

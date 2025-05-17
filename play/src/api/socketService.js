@@ -16,7 +16,7 @@ class SocketService {
   }
 
   // Initialize socket connection
-  connect(serverUrl = import.meta.env.VITE_API_URL) {
+  connect(serverUrl = 'https://codeeditor-back.onrender.com') {
     if (this.socket) {
       return Promise.resolve(this.socket);
     }
