@@ -16,7 +16,7 @@ class SocketService {
   }
 
   // Initialize socket connection
-  connect(serverUrl = 'https://codeeditor-back.onrender.com') {
+  connect(serverUrl = import.meta.env.VITE_WSS_URL) {
     if (this.socket) {
       return Promise.resolve(this.socket);
     }
